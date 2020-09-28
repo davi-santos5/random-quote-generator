@@ -1,37 +1,29 @@
 import React, { useState } from 'react';
 
-import './App.css'
+import './App.css';
+
+import Data from './data/quotes.json';
+
+const quotes = Data.quotes
 
 function App() {
-  const [{ 
-    quote,
-    author,
-    idx
-  }, setState] = useState({
-    quote: ['Melhor faltar do que não ter', 'Mais chato do que chinelo de gordo', 'Mudou o sacerdote, mudou a lei','Toca a saca do faqueiro', 'Random quote here','Another quote','Hello There'],
-    author: ['Berinja', 'Bozos', 'Lan Santos', 'Fitor', 'Random Author','Somebody','General Kenobi'],
-    idx: 0
-  })
+  const [idx, setIdx] = useState(0)
 
 
   function changeQuote() {
-    var i = Math.floor(Math.random() * quote.length)
+    var i = Math.floor(Math.random() * quotes.length)
     while(i === idx){
-      i = Math.floor(Math.random() * quote.length)
+      i = Math.floor(Math.random() * quotes.length)
     }
-    setState({
-     quote,
-     author,
-     idx: i
-    }) 
+    setIdx(i)
   }
 
   return (
     <div id='quote-box'>
-      <h1 id='text'>{quote[idx]}</h1>
-      <p id='author'><span>- </span>{author[idx]}</p>
+      <h1 id='text'>{quotes[idx].text}</h1>
+      <p id='author'><span>- </span>{quotes[idx].author}</p>
       <button id='new-quote' onClick= {changeQuote}>New Quote</button>
-      <a href="twitter.com/intent/tweet" id='tweet-quote'><i class="fab fa-twitter-square fa-2x"></i></a>
+      <a href="twitter.com/intent/tweet" id='tweet-quote'><i className="fab fa-twitter-square fa-2x"></i></a>
     </div>
   )
 }
